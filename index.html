@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+		@import url('https://fonts.googleapis.com/css2?family=Stylish&display=swap');
+	</style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    
+    <form>
+        <input type="text" id="task" name="task" placeholder="Enter a Task">
+        <input type="submit" value="Add Task">
+    </form>
+    
+    <ul id="taskList">
+    </ul>
+    
+    <script>
+        // Get references to the form and list elements
+        const form = document.querySelector('form');
+        const taskList = document.querySelector('#taskList');
+        
+        // Create an event listener to handle form submissions
+        form.addEventListener('submit', (event) => {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+            
+            // Get the task input value and create a new list item
+            const taskInput = document.querySelector('#task');
+            const taskText = taskInput.value;
+            const taskItem = document.createElement('li');
+            taskItem.innerHTML = `${taskText} <span class="delete">X</span>`;
+            
+            // Add an event listener to the delete button
+            const deleteButton = taskItem.querySelector('.delete');
+            deleteButton.addEventListener('click', () => {
+                taskItem.remove();
+            });
+            
+            // Add the new list item to the task list
+            taskList.appendChild(taskItem);
+            
+            // Clear the task input field
+            taskInput.value = '';
+        });
+    </script>
+</body>
+</html>
